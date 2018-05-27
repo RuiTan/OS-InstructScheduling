@@ -111,7 +111,10 @@ public class Controller {
                 appendToWorkDetail(memory.executeAnInstruct(work, m+1), work);
             }
         }
-        workDetail.appendText("本次作业共执行了" + work.executeCount + "次。");
+        Double lostPageRate;
+        lostPageRate =  ((double)memory.lostPageCount / work.executeCount.longValue());
+        workDetail.appendText("本次作业共执行了" + work.executeCount + "次，缺页" + memory.lostPageCount + "次，缺页率为" + lostPageRate*100 + "%");
+        memory.lostPageCount = 0;
         work.executeCount = 0;
     }
     private void appendToWorkDetail(String detail, Work work){

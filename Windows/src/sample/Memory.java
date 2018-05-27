@@ -12,9 +12,7 @@ public class Memory {
     public final Integer maxMemoryBlock = 4;
     public final Integer MemoryBlockNum = 4;
     private final int sleepTime = 0;
-
-//    private TextArea textArea;
-
+    public int lostPageCount = 0;
     public class Block{
         Integer ID;
         boolean isNull;
@@ -102,6 +100,7 @@ public class Memory {
             stringBuilder.append("该指令已被执行过，");
         }
         if (!page.inMemory){
+            lostPageCount++;
             if (pageQueue.size() == MemoryBlockNum){
                 Work.Page lostPage = pageQueue.poll();
                 assert lostPage != null;
