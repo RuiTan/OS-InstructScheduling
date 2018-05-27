@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<SplitPane dividerPositions="0.16722408026755853" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: EEE9E9;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+         <children>
+            <Label layoutX="312.0" layoutY="31.0" text="页面调度程序">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: EEE9E9;">
+         <children>
+            <SplitPane dividerPositions="0.5" prefHeight="483.0" prefWidth="798.0" style="-fx-background-color: EEE9E9;">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <Button layoutX="156.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#executeOne" text="单指令运行" />
+                        <Separator layoutX="-4.0" layoutY="57.0" prefHeight="2.0" prefWidth="401.0" />
+                        <Label layoutX="14.0" layoutY="69.0" text="当前指令详情：" />
+                        <Separator layoutX="6.0" layoutY="243.0" prefHeight="10.0" prefWidth="394.0" />
+                        <Separator layoutX="195.0" layoutY="250.0" orientation="VERTICAL" prefHeight="238.0" prefWidth="6.0" />
+                        <Label layoutX="14.0" layoutY="254.0" text="当前指令运行前内存块情况：" />
+                        <Label layoutX="208.0" layoutY="254.0" text="当前指令运行后内存块情况：" />
+                        <VBox layoutX="8.0" layoutY="277.0" prefHeight="162.0" prefWidth="91.0" style="-fx-background-color: EEE5DE; -fx-alignment: center;">
+                           <children>
+                              <Label style="-fx-border-style: square; -fx-padding: 3;" text="内存块号" textAlignment="CENTER" textFill="#6b6868">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font></Label>
+                              <Separator prefWidth="200.0" />
+                              <Label alignment="CENTER" prefHeight="25.0" prefWidth="67.0" style="-fx-border-color: white; -fx-border-style: square;" text="1" textAlignment="CENTER" textFill="#6b6868">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="25.0" prefWidth="67.0" style="-fx-border-color: white; -fx-border-style: square;" text="2" textAlignment="CENTER" textFill="#6b6868">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="25.0" prefWidth="67.0" style="-fx-border-color: white; -fx-border-style: square;" text="3" textAlignment="CENTER" textFill="#6b6868">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="25.0" prefWidth="67.0" style="-fx-border-color: white; -fx-border-style: square;" text="4" textAlignment="CENTER" textFill="#6b6868">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="99.0" layoutY="277.0" prefHeight="162.0" prefWidth="91.0" style="-fx-background-color: EEE5DE; -fx-alignment: center;">
+                           <children>
+                              <Label style="-fx-border-style: square; -fx-padding: 3;" text="存储页面" textAlignment="CENTER" textFill="#6b6868">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Separator prefWidth="200.0" />
+                              <Label fx:id="page1WithoutExecute" alignment="CENTER" prefHeight="25.0" prefWidth="67.0" style="-fx-border-color: white; -fx-border-style: square;" text="空" textAlignment="CENTER" textFill="#6b6868">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="page2WithoutExecute" alignment="CENTER" prefHeight="25.0" prefWidth="67.0" style="-fx-border-color: white; -fx-border-style: square;" text="空" textAlignment="CENTER" textFill="#6b6868">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="page3WithoutExecute" alignment="CENTER" prefHeight="25.0" prefWidth="67.0" style="-fx-border-color: white; -fx-border-style: square;" text="空" textAlignment="CENTER" textFill="#6b6868">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="page4WithoutExecute" alignment="CENTER" prefHeight="25.0" prefWidth="67.0" style="-fx-border-color: white; -fx-border-style: square;" text="空" textAlignment="CENTER" textFill="#6b6868">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="203.0" layoutY="277.0" prefHeight="162.0" prefWidth="91.0" style="-fx-background-color: EEE5DE; -fx-alignment: center;">
+                           <children>
+                              <Label style="-fx-border-style: square; -fx-padding: 3;" text="内存块号" textAlignment="CENTER" textFill="#6b6868">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Separator prefWidth="200.0" />
+                              <Label alignment="CENTER" prefHeight="25.0" prefWidth="67.0" style="-fx-border-color: white; -fx-border-style: square;" text="1" textAlignment="CENTER" textFill="#6b6868">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="25.0" prefWidth="67.0" style="-fx-border-color: white; -fx-border-style: square;" text="2" textAlignment="CENTER" textFill="#6b6868">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="25.0" prefWidth="67.0" style="-fx-border-color: white; -fx-border-style: square;" text="3" textAlignment="CENTER" textFill="#6b6868">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="25.0" prefWidth="67.0" style="-fx-border-color: white; -fx-border-style: square;" text="4" textAlignment="CENTER" textFill="#6b6868">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="294.0" layoutY="277.0" prefHeight="162.0" prefWidth="91.0" style="-fx-background-color: EEE5DE; -fx-alignment: center;">
+                           <children>
+                              <Label style="-fx-border-style: square; -fx-padding: 3;" text="存储页面" textAlignment="CENTER" textFill="#6b6868">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Separator prefWidth="200.0" />
+                              <Label fx:id="page1WithExecute" alignment="CENTER" prefHeight="25.0" prefWidth="67.0" style="-fx-border-color: white; -fx-border-style: square;" text="空" textAlignment="CENTER" textFill="#6b6868">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="page2WithExecute" alignment="CENTER" prefHeight="25.0" prefWidth="67.0" style="-fx-border-color: white; -fx-border-style: square;" text="空" textAlignment="CENTER" textFill="#6b6868">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="page3WithExecute" alignment="CENTER" prefHeight="25.0" prefWidth="67.0" style="-fx-border-color: white; -fx-border-style: square;" text="空" textAlignment="CENTER" textFill="#6b6868">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="page4WithExecute" alignment="CENTER" prefHeight="25.0" prefWidth="67.0" style="-fx-border-color: white; -fx-border-style: square;" text="空" textAlignment="CENTER" textFill="#6b6868">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <TextArea fx:id="instructDetail" layoutX="19.0" layoutY="92.0" prefHeight="144.0" prefWidth="352.0" />
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="394.0" prefWidth="393.0" />
+              </items>
+            </SplitPane>
+         </children></AnchorPane>
+  </items>
+</SplitPane>
