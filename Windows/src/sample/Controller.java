@@ -33,7 +33,7 @@ public class Controller {
     private Memory memory;
     private int step = 0;
 
-    @FXML
+    @FXML// 单指令运行
     void executeOne() throws InterruptedException {
         instructDetail.setText("");
         if (work == null && memory == null){
@@ -78,6 +78,8 @@ public class Controller {
             updatePage(ps.get(0), ps.get(1), ps.get(2), ps.get(3), ps.get(4), ps.get(5), ps.get(6), ps.get(7));
         }
     }
+
+    // 更新内存块信息
     private void updatePage(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8){
         page1WithoutExecute.setText(p1 == -1 ? "空" : String.valueOf(p1));
         page2WithoutExecute.setText(p2 == -1 ? "空" : String.valueOf(p2));
@@ -88,8 +90,10 @@ public class Controller {
         page3WithExecute.setText(p7 == -1 ? "空" : String.valueOf(p7));
         page4WithExecute.setText(p8 == -1 ? "空" : String.valueOf(p8));
     }
-    @FXML
+
+    @FXML// 单作业运行，执行所有指令
     void executeAll() throws InterruptedException {
+        workDetail.setText("");
         Work work = new Work();
         Memory memory = new Memory();
         while (!work.finishWork()){
@@ -117,9 +121,43 @@ public class Controller {
         memory.lostPageCount = 0;
         work.executeCount = 0;
     }
+
+    // 添加作业指令执行详情
     private void appendToWorkDetail(String detail, Work work){
         workDetail.appendText("Step" + String.valueOf(work.executeCount) + "：");
         workDetail.appendText(detail.replace("\n", ","));
         workDetail.appendText("\n");
+    }
+
+    @FXML// 单作业运行，执行320次指令
+    private void executeAllLimited() throws InterruptedException {
+        workDetail.setText("");
+        Work work = new Work();
+        Memory memory = new Memory();
+        while (!work.finishWork() && !(work.executeCount.equals(work.instructNum))){
+            int m = work.firstInstruct;
+            //0到m-1指令中随机执行
+            work.firstInstruct = new Random().nextInt(m);
+            m = work.firstInstruct;
+            appendToWorkDetail(memory.executeAnInstruct(work, m), work);
+            if (!work.finishWork()){
+                appendToWorkDetail(memory.executeAnInstruct(work, m+1), work);
+            }
+            if (!work.finishWork()){
+                //m-1到319指令中随机执行
+                work.firstInstruct = (new Random().nextInt(work.maxInstruct - m)) + m;
+                m = work.firstInstruct;
+                appendToWorkDetail(memory.executeAnInstruct(work, m),work);
+            }
+            if (!work.finishWork()){
+                appendToWorkDetail(memory.executeAnInstruct(work, m+1), work);
+            }
+        }
+        Double lostPageRate;
+        lostPageRate =  ((double)memory.lostPageCount / work.executeCount.longValue());
+        workDetail.appendText("本次作业共执行了" + work.executeCount + "次，缺页" + memory.lostPageCount + "次，缺页率为" + lostPageRate*100 + "%");
+        workDetail.appendText("\n本次共执行了" + (work.instructNum - work.remainedInstruct) + "条指令，还剩" + work.remainedInstruct + "条指令未执行，作业完成率为" + (1-((double)work.remainedInstruct)/(double)work.instructNum)*100 + "%。");
+        memory.lostPageCount = 0;
+        work.executeCount = 0;
     }
 }

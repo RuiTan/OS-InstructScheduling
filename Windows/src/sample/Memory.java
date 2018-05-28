@@ -1,18 +1,16 @@
 package sample;
 
-import javafx.application.Platform;
-import javafx.scene.control.TextArea;
-
 import java.util.ArrayList;
-import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class Memory {
+    // 四个内存块及其编号
     public final Integer minMemoryBlock = 1;
     public final Integer maxMemoryBlock = 4;
     public final Integer MemoryBlockNum = 4;
-    private final int sleepTime = 0;
+    // 缺页数
     public int lostPageCount = 0;
+    // 内存块类
     public class Block{
         Integer ID;
         boolean isNull;
@@ -48,45 +46,26 @@ public class Memory {
             this.pageID = -1;
         }
     }
+    // 页面队列，放在四个内存块中
     private LinkedBlockingQueue<Work.Page> pageQueue;
+    // 存放四个内存块
     private ArrayList<Block> memoryBlocks;
-
-    public Queue<Work.Page> getPageQueue() {
-        return pageQueue;
-    }
-
-    public void setPageQueue(LinkedBlockingQueue<Work.Page> pageQueue) {
-        this.pageQueue = pageQueue;
-    }
-
     public ArrayList<Block> getMemoryBlocks() {
         return memoryBlocks;
     }
-
-    public void setMemoryBlocks(ArrayList<Block> memoryBlocks) {
-        this.memoryBlocks = memoryBlocks;
-    }
-
-    public Memory(LinkedBlockingQueue<Work.Page> pageQueue, ArrayList<Block> memoryBlocks) {
-        this.pageQueue = pageQueue;
-        this.memoryBlocks = memoryBlocks;
-    }
-
+    // 构造函数
     public Memory(){
         this.pageQueue = new LinkedBlockingQueue<>();
         this.memoryBlocks = new ArrayList<>();
         for (int i = minMemoryBlock; i <= maxMemoryBlock; i++){
             memoryBlocks.add(new Block(i));
         }
-//        this.textArea = textArea;
     }
-
+    // 执行一条指令
     public String executeAnInstruct(Work work, Integer instruct) throws InterruptedException {
-//        System.out.println("当前执行指令："+instruct);
-        Thread.sleep(sleepTime);
-//        Platform.runLater(()->textArea.appendText("当前剩余指令数："+work.remainedInstruct+"\n"));
+        // 执行次数自增
         work.executeCount++;
-        System.out.println("当前剩余指令数："+work.remainedInstruct);
+//        System.out.println("当前剩余指令数："+work.remainedInstruct);
         int pageNum = instruct/work.instructsInEachPage;
         int instructNum = instruct - pageNum*work.instructsInEachPage;
         StringBuilder stringBuilder = new StringBuilder().append("执行指令").append(instruct).append("，指令位于页面").append(pageNum).append("，页面偏移为").append(instructNum).append("\n");
@@ -99,6 +78,7 @@ public class Memory {
         }else {
             stringBuilder.append("该指令已被执行过，");
         }
+        // 若页面不在内存块中，则显示缺页，并进行页面调度
         if (!page.inMemory){
             lostPageCount++;
             if (pageQueue.size() == MemoryBlockNum){
@@ -117,7 +97,6 @@ public class Memory {
                     e.printStackTrace();
                 }
 //                System.out.println("页面" + lostPage.pageID + "被被置换，" + "页面" + page.pageID + "被加入内存块" + memoryBlocks.get(lostPage.memoryNum - 1).ID);
-//                Thread.sleep(500);
             }else {
                 int memoryNum = pageQueue.size() + 1;
                 stringBuilder.append("内存块仍未占满\n将页面").append(pageNum).append("放入").append(memoryNum).append("号内存块中，并执行该指令。");
@@ -127,11 +106,12 @@ public class Memory {
                 memoryBlocks.get(memoryNum - 1).pageID = page.pageID;
                 pageQueue.put(page);
 //                System.out.println("页面" + page.pageID + "被加入内存块" + memoryBlocks.get(page.memoryNum - 1).ID);
-//                Thread.sleep(500);
             }
         }else {
+            //否则直接执行指令即可
             stringBuilder.append("页面").append(pageNum).append("已在内存块中，直接执行指令。");
         }
         return stringBuilder.toString();
     }
+
 }

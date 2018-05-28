@@ -1,7 +1,5 @@
 package sample;
 
-import javafx.util.Pair;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -57,6 +55,12 @@ public class Work {
             this.inMemory = false;
         }
     }
+    public ArrayList<Page> getPages() {
+        return pages;
+    }
+    public void setPages(ArrayList<Page> pages) {
+        this.pages = pages;
+    }
     //指令类
     public class Instruct{
         Integer instructNum;
@@ -70,6 +74,7 @@ public class Work {
     public final Integer instructNum = 320;
     public final Integer minInstruct = 0;
     public final Integer maxInstruct = 319;
+    //每页存储10条指令
     public final Integer instructsInEachPage = 10;
     //未执行的指令数
     public Integer remainedInstruct = 320;
@@ -77,15 +82,6 @@ public class Work {
     public Integer executeCount = 0;
     //首条指令
     public Integer firstInstruct = new Random().nextInt(maxInstruct);
-
-    public ArrayList<Page> getPages() {
-        return pages;
-    }
-
-    public void setPages(ArrayList<Page> pages) {
-        this.pages = pages;
-    }
-
     //存储页面
     private ArrayList<Page> pages;
     //构造函数
@@ -103,11 +99,11 @@ public class Work {
             pages.add(page);
         }
     }
-
+    //完成一个指令，当该指令未被执行过，remainedInstruct减一
     public void finishAnInstruct(){
         remainedInstruct--;
     }
-
+    //判断作业是否完成
     public boolean finishWork(){
         return remainedInstruct == 0;
     }
